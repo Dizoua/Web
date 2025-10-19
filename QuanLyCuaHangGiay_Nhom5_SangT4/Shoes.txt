@@ -1,0 +1,25 @@
+BD001, Giay Bong Da Nike Mercurial Vapor 15, 120.0, White, 4
+BD002, Giay Bong Da Adidas Predator Accuracy, 130.0, Black, 8
+BR001, Giay Bong Ro Nike LeBron 20, 150.0, Red, 5
+BR002, Giay Bong Ro Adidas Dame 8, 140.0, Blue, 6
+RN001, Giay Chay Bo Nike ZoomX Vaporfly Next, 100.0, Green, 20
+GS001, Giay Gym Nike Metcon 8, 90.0, Black, 12
+GS002, Giay Gym Reebok Nano X3, 95.0, White, 10
+BD003, Giay Bong Da Puma Future Z 1.4, 125.0, Yellow, 5
+RN002, Giay Chay Bo Adidas Ultraboost Light, 134.0, White, 12
+BR003, Giay Bong Ro Under Armour Curry 11, 90.0, Blue, 0
+BR004, Giay Bong Ro Kyrie, 123.0, Red, 50
+BD004, Giay Bong Da Nike Tiempo Legend 9, 21.0, Black, 10
+RN003, Giay Chay Bo Asics Gel-Nimbus 25, 123.0, White, 80
+BD005, Giay Bong Da Adidas X Speedportal, 60.0, Black, 70
+GS003, Giay Gym Adidas Adipower 5, 10.0, White, 69
+RN004, Giay Chay Bo New Balance Fresh Foam X, 45.0, Yellow, 25
+GS004, Giay Gym Under Armour TriBase Reign 5, 45.0, Pink, 45
+BD006, Giay Bong Da Puma Ultra Ultimate, 89.0, Black, 70
+BD007, Giay Bong Da Mizuno Morelia Neo III Beta, 67.0, Green, 80
+BD008, Giay Bong Da New Balance Furon v7, 89.0, White, 12
+BD009, Giay Bong Da Under Armour Magnetico Pro, 9.0, Purple, 45
+BD010, Giay Bong Da Umbro Velocita Alchemist, 90.0, Navy, 8
+BR005, Giay Bong Ro Puma MB.02, 200.0, Black, 15
+BR006, Giay Bong Ro Nike Jordan 15, 79.0, White, 70
+BD011, abc, -3.0, black, -5

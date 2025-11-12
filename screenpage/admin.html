@@ -188,6 +188,61 @@
           </div>
         </div>
 
+        <!-- Employees Page -->
+<div class="content hidden" id="employees-page">
+  <div class="page-header">
+    <h2>Employee Management</h2>
+    <button class="add-btn" onclick="showAddEmployeeModal()">
+      <i class="bi bi-person-plus"></i> Add Employee
+    </button>
+  </div>
+
+  <div class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Salary</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="employeeTableBody">
+        <!-- Employees will be loaded dynamically -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Add Employee Modal -->
+<div class="modal" id="addEmployeeModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Add New Employee</h2>
+      <button class="close-btn" onclick="closeAddEmployeeModal()">×</button>
+    </div>
+    <form id="addEmployeeForm">
+      <div class="form-group">
+        <label>Employee Name</label>
+        <input type="text" name="name" required />
+      </div>
+      <div class="form-group">
+        <label>Role</label>
+        <input type="text" name="role" required />
+      </div>
+      <div class="form-group">
+        <label>Salary</label>
+        <input type="number" name="salary" required />
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="cancel-btn" onclick="closeAddEmployeeModal()">Cancel</button>
+        <button type="submit" class="submit-btn">Add Employee</button>
+      </div>
+    </form>
+  </div>
+</div>
+
         <!-- Add Product Modal -->
         <div class="modal" id="addProductModal">
           <div class="modal-content">
@@ -376,5 +431,6 @@
     <script src="../Javascript/admin.js"></script>
   </body>
 </html>
+
 
 

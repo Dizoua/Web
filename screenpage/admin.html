@@ -55,6 +55,11 @@
             <i class="bi bi-gear-fill"></i>
             <span>Settings</span>
           </a>
+          <a class="nav-item" data-page="customers">
+    <i class="fas fa-users"></i> 
+            <span>Customers</span>
+</a>
+
         </nav>
       </aside>
 
@@ -184,7 +189,28 @@
           </div>
         </div>
 
-       
+       <!-- Customer Page -->
+<div id="customers-page" class="content hidden">
+    <h2>Customer List</h2>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Join Date</th>
+                <th>Total Orders</th>
+                <th>Total Spent</th>
+            </tr>
+        </thead>
+        <tbody id="customerTableBody">
+            <!-- Customer rows will be injected here -->
+        </tbody>
+    </table>
+</div>
+
 
 <!-- Add Employee Modal -->
 <div class="modal" id="addEmployeeModal">
@@ -402,6 +428,7 @@
     <script src="../Javascript/admin.js"></script>
   </body>
 </html>
+
 
 
 

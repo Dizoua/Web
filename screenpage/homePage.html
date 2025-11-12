@@ -18,6 +18,25 @@
 
       <div class="header-menu">
         <div class="header-icon">
+          <div class="dropdown header-user">
+            <i class="fas fa-user"></i>
+            <div class="dropdown-menu">
+              <div id="auth-links">
+                <a href="#" onclick="showAuthModal()">Đăng nhập</a>
+                <a href="#" onclick="showAuthTab('register'); showAuthModal()"
+                  >Đăng ký</a
+                >
+              </div>
+              <div id="logout-link" style="display: none">
+                <a href="#" onclick="showSection('profile')"
+                  >Thông tin cá nhân</a
+                >
+                <a href="#" onclick="showSection('orders')">Đơn hàng</a>
+                <a href="#" onclick="logout()">Đăng xuất</a>
+              </div>
+            </div>
+          </div>
+
           <div class="header-user">
             <svg
               width="20"
@@ -759,3 +778,4 @@
     <script src="../Javascript/main.js"></script>
   </body>
 </html>
+

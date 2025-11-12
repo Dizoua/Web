@@ -114,6 +114,28 @@ const sampleCategories = [
         activeProducts: 180
     }
 ];
+const sampleCustomers = [
+    {
+        id: 1,
+        name: 'John Doe',
+        email: 'john@example.com',
+        phone: '0123 456 789',
+        address: '123 Main Street, New York',
+        joinDate: '2024-02-01',
+        totalOrders: 5,
+        totalSpent: 299.95
+    },
+    {
+        id: 2,
+        name: 'Jane Smith',
+        email: 'jane@example.com',
+        phone: '0987 654 321',
+        address: '456 Elm Avenue, Los Angeles',
+        joinDate: '2024-03-10',
+        totalOrders: 3,
+        totalSpent: 180.50
+    }
+];
 
 const sampleOrders = [
     {
@@ -207,13 +229,32 @@ function renderOrders() {
         </tr>
     `).join('');
 }
+function renderCustomers() {
+    const tbody = document.getElementById('customerTableBody');
+    if (!tbody) return;
+
+    tbody.innerHTML = sampleCustomers.map(customer => `
+        <tr>
+            <td>${customer.id}</td>
+            <td>${customer.name}</td>
+            <td>${customer.email}</td>
+            <td>${customer.phone}</td>
+            <td>${customer.address}</td>
+            <td>${customer.joinDate}</td>
+            <td>${customer.totalOrders}</td>
+            <td>$${customer.totalSpent.toFixed(2)}</td>
+        </tr>
+    `).join('');
+}
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     renderProducts();
     renderCategories();
     renderOrders();
+    renderCustomers(); // <--- thêm dòng này
 });
+
 
 // Form Handlers
 document.getElementById('addProductForm')?.addEventListener('submit', (e) => {
@@ -258,3 +299,4 @@ if (imageUpload && imagePreview) {
     });
 
 }
+

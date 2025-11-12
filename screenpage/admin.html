@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sneaker - Shoe Admin</title>
+    <link rel="stylesheet" href="../Css/styleAdmin.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+  </head>
+  <body>
+    <div class="dashboard">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="logo">
+          <i class="bi bi-shop-window"></i>
+          <span>Sneaker - Shoe Admin</span>
+        </div>
+        <nav class="nav-menu">
+          <a href="#" class="nav-item active" data-page="dashboard">
+            <i class="bi bi-house-door-fill"></i>
+            <span>Dashboard</span>
+          </a>
+          <div class="nav-group">
+            <a href="#" class="nav-item" data-page="products">
+              <i class="bi bi-box2-fill"></i>
+              <span>Products</span>
+              <i class="bi bi-chevron-down"></i>
+            </a>
+            <div class="nav-submenu">
+              <a href="#" class="nav-subitem" data-page="product-list">
+                <i class="bi bi-card-list"></i> <span>Product List</span>
+              </a>
+              <a href="#" class="nav-subitem" data-page="categories">
+                <i class="bi bi-tags-fill"></i>
+                <span>Categories</span>
+              </a>
+            </div>
+          </div>
+          <a href="#" class="nav-item" data-page="orders">
+            <i class="bi bi-cart3"></i>
+            <span>Orders</span>
+          </a>
+          <a href="#" class="nav-item" data-page="customers">
+            <i class="bi bi-people-fill"></i>
+            <span>Customers</span>
+          </a>
+          <a href="#" class="nav-item" data-page="analytics">
+            <i class="bi bi-bar-chart-steps"></i>
+            <span>Analytics</span>
+          </a>
+          <a href="#" class="nav-item" data-page="settings">
+            <i class="bi bi-gear-fill"></i>
+            <span>Settings</span>
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+          <div class="search-bar">
+            <i class="bi bi-search"></i>
+            <input type="text" placeholder="Search..." />
+          </div>
+          <div class="header-right">
+            <div class="notifications">
+              <i class="bi bi-bell-fill"></i>
+            </div>
+            <div class="profile">
+              <img src="https://placehold.co/100x100" alt="Profile" />
+              <span>Admin User</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Product List Page -->
+        <div class="content hidden" id="product-list-page">
+          <div class="page-header">
+            <h2>Product List</h2>
+            <button class="add-btn" onclick="showAddProductModal()">
+              <i class="fas fa-plus"></i> Add Product
+            </button>
+          </div>
+          <div class="filter-bar">
+            <div class="filter-group">
+              <label>Category:</label>
+              <select>
+                <option value="">All Categories</option>
+                <option value="men">MEN</option>
+                <option value="women">Women</option>
+                <option value="unisex">Unisex</option>
+                <option value="casual">Casual</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label>Status:</label>
+              <select>
+                <option value="">All Status</option>
+                <option value="active">Active</option>
+                <option value="draft">Draft</option>
+                <option value="archived">Archived</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>
+                    <input type="checkbox" id="selectAll" />
+                  </th>
+                  <th>Product</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="productTableBody">
+                <!-- Products will be dynamically added here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Categories Page -->
+        <div class="content hidden" id="categories-page">
+          <div class="page-header">
+            <h2>Categories</h2>
+            <button class="add-btn" onclick="showAddCategoryModal()">
+              <i class="fas fa-plus"></i> Add Category
+            </button>
+          </div>
+          <div class="categories-grid" id="categoriesGrid">
+            <!-- Categories will be dynamically added here -->
+          </div>
+        </div>
+
+        <!-- Orders Page -->
+        <div class="content hidden" id="orders-page">
+          <div class="page-header">
+            <h2>Orders Management</h2>
+          </div>
+          <div class="filter-bar">
+            <div class="filter-group">
+              <label>Status:</label>
+              <select>
+                <option value="">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="processing">Processing</option>
+                <option value="completed">Completed</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label>Date Range:</label>
+              <input type="date" class="date-input" />
+              <span>to</span>
+              <input type="date" class="date-input" />
+            </div>
+          </div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Products</th>
+                  <th>Total</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="orderTableBody">
+                <!-- Orders will be dynamically added here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Add Product Modal -->
+        <div class="modal" id="addProductModal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2>Add New Product</h2>
+              <button class="close-btn" onclick="closeAddProductModal()">
+                ×
+              </button>
+            </div>
+            <form id="addProductForm">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>Product Name</label>
+                  <input type="text" name="name" required />
+                </div>
+                <div class="form-group">
+                  <label>Category</label>
+                  <select name="category" required>
+                    <option value="">Select Category</option>
+                    <option value="men">Men</option>
+                    <option value="women">Women</option>
+                    <option value="unisex">Unisex</option>
+                    <option value="casual">Casual</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Price</label>
+                  <input type="number" name="price" step="0.01" required />
+                </div>
+                <div class="form-group">
+                  <label>Stock</label>
+                  <input type="number" name="stock" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <textarea name="description" required></textarea>
+              </div>
+              <div class="form-group">
+                <label>Images</label>
+                <div class="image-upload-container">
+                  <div class="image-upload">
+                    <input type="file" accept="image/*" multiple />
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag & Drop or Click to Upload</p>
+                  </div>
+                  <div class="image-preview" id="imagePreview"></div>
+                </div>
+              </div>
+              <div class="modal-actions">
+                <button
+                  type="button"
+                  class="cancel-btn"
+                  onclick="closeAddProductModal()"
+                >
+                  Cancel
+                </button>
+                <button type="submit" class="submit-btn">Add Product</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Add Category Modal -->
+        <div class="modal" id="addCategoryModal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2>Add New Category</h2>
+              <button class="close-btn" onclick="closeAddCategoryModal()">
+                ×
+              </button>
+            </div>
+            <form id="addCategoryForm">
+              <div class="form-group">
+                <label>Category Name</label>
+                <input type="text" name="name" required />
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <textarea name="description"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Parent Category</label>
+                <select name="parent">
+                  <option value="">None</option>
+                  <!-- Parent categories will be dynamically added here -->
+                </select>
+              </div>
+              <div class="modal-actions">
+                <button
+                  type="button"
+                  class="cancel-btn"
+                  onclick="closeAddCategoryModal()"
+                >
+                  Cancel
+                </button>
+                <button type="submit" class="submit-btn">Add Category</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Order Edit Modal -->
+        <div class="modal" id="orderEditModal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2>Edit Order #<span id="orderNumber"></span></h2>
+              <button class="close-btn" onclick="closeOrderEditModal()">
+                ×
+              </button>
+            </div>
+            <form id="orderEditForm">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>Order Status</label>
+                  <select name="status" required>
+                    <option value="pending">Pending</option>
+                    <option value="processing">Processing</option>
+                    <option value="completed">Completed</option>
+                    <option value="cancelled">Cancelled</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Payment Status</label>
+                  <select name="payment_status" required>
+                    <option value="pending">Pending</option>
+                    <option value="paid">Paid</option>
+                    <option value="refunded">Refunded</option>
+                  </select>
+                </div>
+              </div>
+              <div class="order-items">
+                <h3>Order Items</h3>
+                <table class="order-items-table">
+                  <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th>Quantity</th>
+                      <th>Price</th>
+                      <th>Total</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="orderItemsBody">
+                    <!-- Order items will be dynamically added here -->
+                  </tbody>
+                </table>
+              </div>
+              <div class="order-summary">
+                <div class="summary-row">
+                  <span>Subtotal:</span>
+                  <span id="orderSubtotal">$0.00</span>
+                </div>
+                <div class="summary-row">
+                  <span>Shipping:</span>
+                  <span id="orderShipping">$0.00</span>
+                </div>
+                <div class="summary-row">
+                  <span>Tax:</span>
+                  <span id="orderTax">$0.00</span>
+                </div>
+                <div class="summary-row total">
+                  <span>Total:</span>
+                  <span id="orderTotal">$0.00</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Notes</label>
+                <textarea name="notes"></textarea>
+              </div>
+              <div class="modal-actions">
+                <button
+                  type="button"
+                  class="cancel-btn"
+                  onclick="closeOrderEditModal()"
+                >
+                  Cancel
+                </button>
+                <button type="submit" class="submit-btn">Update Order</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="../Javascript/admin.js"></script>
+  </body>
+</html>

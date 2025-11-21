@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sneaker Store - Cửa hàng giày thể thao</title>
+    <!--<link rel="stylesheet" href="a1.css" />-->
+    <link rel="stylesheet" href="user1.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- Header đã sửa -->
+    <header class="header">
+      <div class="header-logo">
+        <img src="img/SneakerShoes.jpg" alt="Logo Store" />
+      </div>
+
+      <div class="header-menu">
+        <div class="header-icon">
+          <!-- User Icon với dropdown menu -->
+          <div class="dropdown header-user">
+            <i class="fas fa-user"></i>
+            <div class="dropdown-menu">
+              <div id="auth-links">
+                <a href="#" onclick="showAuthModal()">Đăng nhập</a>
+                <a href="#" onclick="showAuthTab('register'); showAuthModal()"
+                  >Đăng ký</a
+                >
+              </div>
+              <div id="logout-link" style="display: none">
+                <a href="#" onclick="showSection('profile')"
+                  >Thông tin cá nhân</a
+                >
+                <a href="#" onclick="showSection('orders')">Đơn hàng</a>
+                <a href="#" onclick="logout()">Đăng xuất</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cart Icon -->
+          <div class="header-user" onclick="showSection('cart')">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">0</span>
+          </div>
+
+          <!-- Search Icon -->
+          <div class="header-user" onclick="focusSearch()">
+            <i class="fas fa-search"></i>
+          </div>
+        </div>
+
+        <div class="header-menu-list">
+          <a
+            href="#"
+            onclick="showSection('home')"
+            class="active"
+            id="home-link"
+            style="font-weight: bold"
+            >HOME</a
+          >
+          <a href="#" onclick="showSection('products')" id="products-link"
+            >SNEAKER</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <!-- Trang chủ -->
+    <section id="home" class="section active">
+      <!-- Banner section -->
+      <section class="banner_web">
+        <h1 class="title_image">
+          <br />
+          Super Flash Sale
+          <br />
+          50% Off
+        </h1>
+        <img src="img/banner_top.png" alt="" />
+        <div class="image_product">
+          <div class="image_banner_web">
+            <img src="img/banner_1.png" alt="" />
+          </div>
+          <div class="image_banner_web">
+            <img width="150%" src="img/banner_3.png" alt="" />
+          </div>
+          <div class="image_banner_web">
+            <img src="img/banner_2.png" alt="" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Best Seller section -->
+      <section class="show_product">
+        <h1>BEST SELLER</h1>
+
+        <!-- <div class="category_product"></div> -->
+
+        <div class="product-grid" id="featured-products">
+          <!-- Sản phẩm sẽ được tải bằng JavaScript -->
+        </div>
+      </section>
+
+      <!-- Illustrative Image section -->
+      <section class="illustrative_image">
+        <div class="floating">
+          <div class="floating_title_1">
+            Newbalance Running <br />
+            Sneakers
+          </div>
+          <div class="floating_title_2">
+            Shoes that transform your body language <br />
+            and attidude.
+          </div>
+          <div id="shop-now" onclick="showSection('products')">SHOP NOW</div>
+        </div>
+
+        <div class="floating_shoe">
+          <img
+            src="assets/shoes-shoe-png-transparent-shoe-images-pluspng-17 1.png"
+            alt=""
+          />
+        </div>
+      </section>
+
+      <!-- Criteria section -->
+      <section class="criteria_shop">
+        <div class="criteria_item">
+          <div class="criteria">
+            <i
+              class="fas fa-shipping-fast"
+              style="font-size: 66px; color: #6b68ff"
+            ></i>
+            <h1 class="criteria_text">FREE SHIPPING</h1>
+          </div>
+          <div class="criteria">
+            <i
+              class="fas fa-undo-alt"
+              style="font-size: 66px; color: #6b68ff"
+            ></i>
+            <div class="criteria_text">100% REFUND</div>
+          </div>
+          <div class="criteria">
+            <i
+              class="fas fa-headset"
+              style="font-size: 66px; color: #6b68ff"
+            ></i>
+            <div class="criteria_text">SUPPORT 24/7</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Product section -->
+      <section class="featured-product">
+        <div class="text_featured">featured products</div>
+        <div class="featured-product-cart">
+          <div class="image_featured">
+            <img
+              height="140px"
+              width="140px"
+              src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+              alt=""
+            />
+            <div class="product_info">
+              <h3>Nike Zoom Fly <br />Sneakers</h3>
+              <div class="price_2">
+                <span class="discounted_price">400.000 VND</span>
+                <span class="original_price">460.000 VND</span>
+              </div>
+            </div>
+          </div>
+          <div class="image_featured">
+            <img
+              height="140px"
+              width="140px"
+              src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+              alt=""
+            />
+            <div class="product_info">
+              <h3>Vans Old Skool <br />Sneakers</h3>
+              <div class="price_2">
+                <span class="discounted_price">700.000 VND</span>
+                <span class="original_price">736.000 VND</span>
+              </div>
+            </div>
+          </div>
+          <div class="image_featured">
+            <img
+              height="140px"
+              src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+              alt=""
+            />
+            <br />
+            <div class="product_info">
+              <h3>Nike Air Max 270 <br />Sneakers</h3>
+              <div class="price_2">
+                <span class="discounted_price">800.000 VND</span>
+                <span class="original_price">874.000 VND</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- Section Sản phẩm -->
+    <section id="products" class="section">
+      <div class="container">
+        <div class="page-header">
+          <h1>Tất cả sản phẩm</h1>
+          <p>Khám phá bộ sưu tập giày sneaker của chúng tôi</p>
+        </div>
+
+        <!-- Bộ lọc và tìm kiếm -->
+        <div class="filter-section">
+          <div class="search-bar">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Tìm kiếm sản phẩm theo tên..."
+            />
+            <button onclick="searchProducts()">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+
+          <div class="advanced-search">
+            <select id="category-filter">
+              <option value="">Tất cả danh mục</option>
+              <option value="Nike">Nike</option>
+              <option value="Adidas">Adidas</option>
+              <option value="Puma">Puma</option>
+              <option value="Vans">Vans</option>
+              <option value="Converse">Converse</option>
+              <option value="New Balance">New Balance</option>
+            </select>
+
+            <select id="price-range">
+              <option value="">Tất cả mức giá</option>
+              <option value="0-999999">Dưới 1,000,000đ</option>
+              <option value="1000000-2000000">1,000,000đ - 2,000,000đ</option>
+              <option value="2000001-5000000">2,000,000đ - 5,000,000đ</option>
+            </select>
+
+            <button onclick="advancedSearch()" class="filter-btn">
+              <i class="fas fa-filter"></i> Lọc sản phẩm
+            </button>
+          </div>
+        </div>
+
+        <!-- Danh sách sản phẩm -->
+        <div class="product-grid" id="all-products">
+          <!-- Sản phẩm sẽ được tải bằng JavaScript -->
+        </div>
+
+        <!-- Phân trang -->
+        <div class="pagination" id="pagination">
+          <!-- Phân trang sẽ được tải bằng JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Chi tiết sản phẩm -->
+    <section id="product-detail" class="section">
+      <div class="container">
+        <button class="back-btn" onclick="showSection('products')">
+          <i class="fas fa-arrow-left"></i> Quay lại sản phẩm
+        </button>
+        <div id="product-detail-content">
+          <!-- Chi tiết sản phẩm sẽ được tải bằng JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Thông tin cá nhân -->
+    <section id="profile" class="section">
+      <div class="container">
+        <div class="page-header">
+          <h1>Thông tin cá nhân</h1>
+          <p>Quản lý thông tin tài khoản của bạn</p>
+        </div>
+        <div class="profile-box">
+          <div class="user-info">
+            <div class="avatar">
+              <i class="fas fa-user-circle"></i>
+            </div>
+            <div>
+              <h3 id="current-username">Chưa đăng nhập</h3>
+              <p class="member-info" id="member-info"></p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Họ tên <span class="required">*</span></label>
+              <input type="text" id="fullname" placeholder="Nhập họ và tên" />
+            </div>
+            <div>
+              <label>Số điện thoại <span class="required">*</span></label>
+              <input type="text" id="phone" placeholder="Nhập số điện thoại" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Email <span class="required">*</span></label>
+              <input type="email" id="email" placeholder="Nhập địa chỉ email" />
+            </div>
+            <div>
+              <label>Ngày sinh</label>
+              <input type="date" id="birthday" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Địa chỉ <span class="required">*</span></label>
+              <textarea
+                id="address"
+                placeholder="Nhập địa chỉ đầy đủ"
+              ></textarea>
+            </div>
+          </div>
+
+          <button class="save-btn" onclick="saveProfile()">
+            <i class="fas fa-save"></i> Lưu thông tin
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Giỏ hàng -->
+    <section id="cart" class="section">
+      <div class="container">
+        <div class="page-header">
+          <h1>Giỏ hàng của bạn</h1>
+          <p>Xem và quản lý các sản phẩm trong giỏ hàng</p>
+        </div>
+        <div id="cart-items">
+          <!-- Giỏ hàng  -->
+        </div>
+        <div class="cart-total">
+          <h3>Tổng cộng: <span id="total-amount">0</span></h3>
+          <button class="checkout-btn" onclick="showSection('checkout')">
+            <i class="fas fa-credit-card"></i> Thanh toán
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Thanh toán -->
+    <section id="checkout" class="section">
+      <div class="container">
+        <div class="page-header">
+          <h1>Thanh toán</h1>
+          <p>Hoàn tất đơn hàng của bạn</p>
+        </div>
+        <div class="checkout-content">
+          <div class="checkout-section">
+            <h3><i class="fas fa-map-marker-alt"></i> Địa chỉ giao hàng</h3>
+            <div class="address-options">
+              <label>
+                <input
+                  type="radio"
+                  name="address-option"
+                  value="saved"
+                  checked
+                  onchange="toggleAddressInput()"
+                />
+                Sử dụng địa chỉ đã lưu
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="address-option"
+                  value="new"
+                  onchange="toggleAddressInput()"
+                />
+                Nhập địa chỉ mới
+              </label>
+            </div>
+            <div id="saved-address" class="address-display">
+              <!-- Địa chỉ đã lưu -->
+            </div>
+            <div id="new-address" class="address-input" style="display: none">
+              <textarea
+                id="new-address-input"
+                placeholder="Nhập địa chỉ giao hàng mới..."
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="checkout-section">
+            <h3><i class="fas fa-credit-card"></i> Phương thức thanh toán</h3>
+            <div class="payment-options">
+              <label>
+                <input type="radio" name="payment" value="cod" checked />
+                <i class="fas fa-money-bill-wave"></i> Thanh toán khi nhận hàng
+                (COD)
+              </label>
+              <label>
+                <input type="radio" name="payment" value="banking" />
+                <i class="fas fa-university"></i> Chuyển khoản ngân hàng
+              </label>
+              <label>
+                <input type="radio" name="payment" value="online" />
+                <i class="fas fa-globe"></i> Thanh toán trực tuyến
+              </label>
+            </div>
+          </div>
+
+          <div class="checkout-section">
+            <h3><i class="fas fa-clipboard-check"></i> Xác nhận đơn hàng</h3>
+            <div id="checkout-items">
+              <!-- Sản phẩm thanh toán -->
+            </div>
+            <div class="checkout-total">
+              <h3>Tổng tiền: <span id="checkout-total">0</span></h3>
+            </div>
+          </div>
+
+          <button class="confirm-order-btn" onclick="confirmOrder()">
+            <i class="fas fa-check"></i> Xác nhận đặt hàng
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Xác nhận đơn hàng -->
+    <section id="order-confirmation" class="section">
+      <div class="container">
+        <div class="confirmation-content">
+          <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h2>Đặt hàng thành công!</h2>
+          <p>Cảm ơn bạn đã mua hàng tại SneakerStore</p>
+          <div id="order-summary">
+            <!-- Thông tin đơn hàng -->
+          </div>
+          <div class="confirmation-actions">
+            <button onclick="showSection('home')">
+              <i class="fas fa-home"></i> Về trang chủ
+            </button>
+            <button onclick="showSection('orders')">
+              <i class="fas fa-list"></i> Xem đơn hàng
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Đơn hàng -->
+    <section id="orders" class="section">
+      <div class="container">
+        <div class="page-header">
+          <h1>Lịch sử đơn hàng</h1>
+          <p>Theo dõi các đơn hàng của bạn</p>
+        </div>
+        <div id="order-history">
+          <!-- Đơn hàng  -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal đăng nhập/đăng ký -->
+    <div id="auth-modal" class="modal">
+      <div class="modal-content large-modal">
+        <span class="close-modal" onclick="closeAuthModal()">&times;</span>
+
+        <div class="auth-tabs">
+          <button class="auth-tab active" onclick="showAuthTab('login')">
+            <i class="fas fa-sign-in-alt"></i> Đăng nhập
+          </button>
+          <button class="auth-tab" onclick="showAuthTab('register')">
+            <i class="fas fa-user-plus"></i> Đăng ký
+          </button>
+        </div>
+
+        <div id="login-tab" class="auth-tab-content active">
+          <div class="auth-header">
+            <h3>Đăng nhập tài khoản</h3>
+            <p>Chào mừng bạn trở lại!</p>
+          </div>
+          <div class="auth-form">
+            <div class="form-group">
+              <label for="modal-login-username">Tên đăng nhập</label>
+              <input
+                type="text"
+                id="modal-login-username"
+                placeholder="Nhập tên đăng nhập của bạn"
+              />
+            </div>
+            <div class="form-group">
+              <label for="modal-login-password">Mật khẩu</label>
+              <input
+                type="password"
+                id="modal-login-password"
+                placeholder="Nhập mật khẩu của bạn"
+              />
+            </div>
+            <button class="auth-btn" onclick="login()">
+              <i class="fas fa-sign-in-alt"></i> Đăng nhập
+            </button>
+            <div class="auth-footer">
+              <p>
+                Chưa có tài khoản?
+                <a
+                  href="#"
+                  onclick="showAuthTab('register')"
+                  class="register-link"
+                  >Đăng ký ngay</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div id="register-tab" class="auth-tab-content">
+          <div class="auth-header">
+            <h3>Đăng ký tài khoản</h3>
+            <p>Tham gia cùng chúng tôi!</p>
+          </div>
+          <div class="auth-form">
+            <div class="form-group">
+              <label for="modal-reg-username">Tên đăng nhập</label>
+              <input
+                type="text"
+                id="modal-reg-username"
+                placeholder="Chọn tên đăng nhập"
+              />
+            </div>
+            <div class="form-group">
+              <label for="modal-reg-password">Mật khẩu</label>
+              <input
+                type="password"
+                id="modal-reg-password"
+                placeholder="Tạo mật khẩu (ít nhất 6 ký tự)"
+              />
+            </div>
+            <div class="form-group">
+              <label for="modal-reg-birthday">Ngày sinh</label>
+              <input type="date" id="modal-reg-birthday" />
+            </div>
+            <button class="auth-btn" onclick="register()">
+              <i class="fas fa-user-plus"></i> Đăng ký
+            </button>
+            <div class="auth-footer">
+              <p>
+                Đã có tài khoản?
+                <a href="#" onclick="showAuthTab('login')" class="register-link"
+                  >Đăng nhập ngay</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer đã sửa -->
+    <footer class="footer">
+      <div class="footer-top">
+        <div class="footer-logo">
+          <img src="img/SneakerShoes.jpg" alt="SneakerShoes" />
+        </div>
+
+        <button class="checkout-btn"><i></i> CONTACT NOW</button>
+
+        <div class="footer-contact-now">
+          <div class="follow-us">
+            <h4>FOLLOW US</h4>
+            <p>
+              Since the 1500s, when an unknown printer took a galley of type and
+              scrambled.
+            </p>
+            <div class="social-icon">
+              <i class="fab fa-facebook"></i>
+              <i class="fab fa-instagram"></i>
+              <i class="fab fa-tiktok"></i>
+              <i class="fab fa-youtube"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-title">
+          <h4>Information</h4>
+          <p>
+            About Us <br />
+            Information <br />
+            Privacy Policy <br />
+            Terms & Conditions
+          </p>
+        </div>
+        <div class="footer-title">
+          <h4>Service</h4>
+          <p>
+            About Us <br />
+            Information <br />
+            Privacy Policy <br />
+            Terms & Conditions
+          </p>
+        </div>
+        <div class="footer-title">
+          <h4 class="footer-title">Contact Us</h4>
+          <p>
+            273 An Duong Vuong <br />
+            Ward 3 <br />
+            District 5 <br />
+            HCMC
+          </p>
+        </div>
+        <div class="footer-title">
+          <h4 class="footer-title">Our Offers</h4>
+          <p>
+            New Products <br />
+            Top Sellers <br />
+            Special Offers <br />
+            Manufacturers
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="user1.js"></script>
+    <script src="shared-storage.js"></script>
+  </body>
+</html>

@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sneaker Admin</title>
+
+    <link rel="stylesheet" href="admin.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+  </head>
+  <body>
+    <!-- LOGIN -->
+    <div id="loginSection" class="screen">
+      <form id="loginForm" class="login-box" autocomplete="off">
+        <h2>Đăng nhập Admin</h2>
+        <label for="username">Tên đăng nhập</label>
+        <input
+          id="username"
+          type="text"
+          placeholder="Nhập tên đăng nhập"
+          required
+        />
+        <label for="password">Mật khẩu</label>
+        <input
+          id="password"
+          type="password"
+          placeholder="Nhập mật khẩu"
+          required
+        />
+        <div id="errorMessage" class="error-message"></div>
+        <button type="submit" class="btn primary">Đăng nhập</button>
+      </form>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboardSection" class="dashboard hidden">
+      <aside class="sidebar">
+        <div class="logo">
+          <i class="bi bi-shop-window"></i><span>Sneaker Admin</span>
+        </div>
+        <nav class="nav-menu">
+          <a class="nav-item" data-page="dashboard"
+            ><i class="bi bi-house-fill"></i><span>Dashboard</span></a
+          >
+          <a class="nav-item active" data-page="products"
+            ><i class="bi bi-box2"></i><span>Sản phẩm</span></a
+          >
+          <a class="nav-item" data-page="customers"
+            ><i class="bi bi-people-fill"></i><span>Khách hàng</span></a
+          >
+          <a class="nav-item" data-page="orders"
+            ><i class="bi bi-cart3"></i><span>Đơn hàng</span></a
+          >
+          <a class="nav-item" data-page="analytics"
+            ><i class="bi bi-bar-chart"></i><span>Thống kê</span></a
+          >
+          <a class="nav-item" data-page="receipt">
+            <i class="bi bi-truck"></i><span>Phiếu nhập</span></a
+          >
+          <a class="nav-item" onclick="logout()"
+            ><i class="bi bi-box-arrow-right"></i><span>Đăng xuất</span></a
+          >
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <header class="header">
+          <div class="profile">
+            <img src="https://placehold.co/100x100" alt="profile" />
+            <span id="adminName">Admin</span>
+          </div>
+        </header>
+
+        <!-- PAGES -->
+        <!-- Dashboard (3x2 layout) -->
+        <div id="dashboard-page" class="content hidden">
+          <h2>Dashboard</h2>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon" style="background: #3b82f6">
+                <i class="bi bi-cart3"></i>
+              </div>
+              <div class="stat-details">
+                <h3>Tổng đơn hàng</h3>
+                <div id="totalOrders" class="stat-number">0</div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon" style="background: #10b981">
+                <i class="bi bi-currency-dollar"></i>
+              </div>
+              <div class="stat-details">
+                <h3>Doanh thu</h3>
+                <div id="totalRevenue" class="stat-number">$0</div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon" style="background: #8b5cf6">
+                <i class="bi bi-people"></i>
+              </div>
+              <div class="stat-details">
+                <h3>Khách hàng</h3>
+                <div id="totalCustomers" class="stat-number">0</div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon" style="background: #f59e0b">
+                <i class="bi bi-clock"></i>
+              </div>
+              <div class="stat-details">
+                <h3>Đơn chờ xử lý</h3>
+                <div id="pendingOrders" class="stat-number">0</div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon" style="background: #ec4899">
+                <i class="bi bi-graph-up"></i>
+              </div>
+              <div class="stat-details">
+                <h3>Lợi nhuận</h3>
+                <div id="totalProfit" class="stat-number">$0</div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon" style="background: #06b6d4">
+                <i class="bi bi-box-seam"></i>
+              </div>
+              <div class="stat-details">
+                <h3>Tổng sản phẩm</h3>
+                <div id="totalProducts" class="stat-number">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Products page -->
+        <div id="products-page" class="content">
+          <div class="dashboard-card">
+            <div class="section-header">
+              <h3>Danh sách sản phẩm</h3>
+              <div class="section-actions">
+                <button id="addProductBtn" class="add-btn">
+                  <i class="fa fa-plus"></i> Thêm sản phẩm
+                </button>
+              </div>
+            </div>
+
+            <div class="filter-bar">
+              <div class="filter-group">
+                <label>Loại:</label>
+                <select id="categoryFilter"></select>
+              </div>
+              <div class="filter-group">
+                <label>Trạng thái:</label>
+                <select id="statusFilter">
+                  <option value="">Tất cả</option>
+                  <option value="active">Đang bán</option>
+                  <option value="hidden">Đã ẩn</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Mã</th>
+                    <th>Sản phẩm</th>
+                    <th>Loại</th>
+                    <th>Giá nhập</th>
+                    <th>Giá bán</th>
+                    <th>% LN</th>
+                    <th>Tồn</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody id="productTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customers page -->
+        <div id="customers-page" class="content hidden">
+          <div class="dashboard-card">
+            <div class="section-header"><h3>Quản lý Khách hàng</h3></div>
+            <div class="filter-bar">
+              <div class="filter-group">
+                <label>Tìm kiếm:</label>
+                <input
+                  id="customerSearch"
+                  type="text"
+                  placeholder="Tên / email / điện thoại"
+                />
+              </div>
+            </div>
+
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Tên đăng nhập</th>
+                    <th>Họ tên</th>
+                    <th>Email</th>
+                    <th>SDT</th>
+                    <th>Mật khẩu</th>
+                    <th>Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody id="customerTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Orders page -->
+        <div id="orders-page" class="content hidden">
+          <div class="dashboard-card">
+            <div class="section-header"><h3>Đơn hàng</h3></div>
+
+            <div class="filter-bar">
+              <div class="filter-group">
+                <label>Trạng thái:</label>
+                <select id="orderStatusFilter">
+                  <option value="">Tất cả</option>
+                  <option value="new">Mới</option>
+                  <option value="pending">Chờ xử lý</option>
+                  <option value="processing">Đang giao</option>
+                  <option value="completed">Đã giao</option>
+                  <option value="cancelled">Đã hủy</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <label>Thời gian:</label>
+                <select id="timeFilter">
+                  <option>Tất cả thời gian</option>
+                  <option value="today">Hôm nay</option>
+                  <option value="7days">7 ngày qua</option>
+                  <option value="month">Tháng này</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Mã đơn</th>
+                    <th>Khách</th>
+                    <th>Sản phẩm</th>
+                    <th>Tổng tiền</th>
+                    <th>Ngày</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody id="orderTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Receipt page -->
+        <div id="receipt-page" class="content hidden">
+          <div class="dashboard-card">
+            <div class="section-header">
+              <h3>Quản Lý Phiếu Nhập</h3>
+              <div class="section-actions">
+                <button id="addReceiptBtn" class="add-btn">
+                  <i class="fa fa-plus"></i> Thêm phiếu nhập
+                </button>
+              </div>
+            </div>
+            <div class="filter-bar">
+              <div class="filter-group">
+                <label>Thời gian:</label>
+                <select id="receiptTimeFilter">
+                  <option>Tất cả thời gian</option>
+                  <option value="today">Hôm nay</option>
+                  <option value="7days">7 ngày qua</option>
+                  <option value="month">Tháng này</option>
+                </select>
+              </div>
+            </div>
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Mã Phiếu</th>
+                    <th>Ngày Lập</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Số Lượng</th>
+                    <th>Hãng</th>
+                    <th>Giá nhập</th>
+                    <th>Tổng tiền</th>
+                    <th>Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody id="receiptTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Analytics page -->
+        <div id="analytics-page" class="content hidden">
+          <div class="dashboard-card">
+            <h3>Sản phẩm sắp hết hàng</h3>
+            <div class="filter-bar">
+              <div class="filter-group">
+                <label>Ngưỡng cảnh báo:</label>
+                <input type="number" id="stockThreshold" value="10" min="0" />
+                <button
+                  onclick="updateStockThreshold()"
+                  class="action-btn edit-btn"
+                >
+                  Cập nhật
+                </button>
+              </div>
+            </div>
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Mã SP</th>
+                    <th>Tên</th>
+                    <th>Loại</th>
+                    <th>Tồn kho</th>
+                    <th>Trạng thái</th>
+                  </tr>
+                </thead>
+                <tbody id="lowStockTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- MODALS -->
+    <!-- Add Product Modal -->
+    <div id="addProductModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Thêm sản phẩm</h2>
+          <button class="close-btn" onclick="closeModal('addProductModal')">
+            ×
+          </button>
+        </div>
+        <form id="addProductForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Mã SP</label>
+              <input id="newProductCode" type="text" readonly />
+            </div>
+            <div class="form-group">
+              <label>Tên SP</label>
+              <input id="newProductName" type="text" required />
+            </div>
+            <div class="form-group">
+              <label>Loại</label>
+              <select id="newProductCategory" required></select>
+            </div>
+            <div class="form-group">
+              <label>Giá nhập ($)</label>
+              <input
+                id="newProductImportPrice"
+                type="number"
+                step="0.01"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>% Lợi nhuận</label>
+              <input
+                id="newProductProfit"
+                type="number"
+                step="0.1"
+                value="10"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>Giá bán ($)</label>
+              <input
+                id="newProductSalePrice"
+                type="number"
+                step="0.01"
+                readonly
+              />
+            </div>
+            <div class="form-group">
+              <label>Tồn kho</label>
+              <input id="newProductStock" type="number" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Mô tả</label>
+            <textarea id="newProductDescription"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Ảnh sản phẩm</label>
+            <input id="newProductImage" type="file" accept="image/*" />
+          </div>
+          <div class="modal-actions">
+            <button
+              type="button"
+              class="cancel-btn"
+              onclick="closeModal('addProductModal')"
+            >
+              Hủy
+            </button>
+            <button type="submit" class="add-btn">Thêm</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Add Receipt Modal -->
+    <div id="addReceiptModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Thêm phiếu nhập</h2>
+          <button class="close-btn" onclick="closeModal('addReceiptModal')">
+            ×
+          </button>
+        </div>
+        <form id="addReceiptForm">
+          <div class="form-group">
+            <label>Mã Phiếu</label>
+            <input id="newReceiptCode" type="text" readonly />
+          </div>
+          <div class="form-group">
+            <label>Ngày Lập</label>
+            <input id="newReceiptDate" type="date" required />
+          </div>
+          <div class="form-group">
+            <label>Tên Sản Phẩm</label>
+            <input
+              id="newReceiptProductName"
+              type="text"
+              placeholder="Nhập tên sản phẩm..."
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Loại</label>
+            <select id="newReceiptCategory" required>
+              <option value="">Chọn loại</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Số lượng</label>
+            <input id="newReceiptQuantity" type="number" min="1" required />
+          </div>
+          <div class="form-group">
+            <label>Giá nhập ($)</label>
+            <input id="newReceiptPrice" type="number" step="0.01" required />
+          </div>
+          <div class="form-group">
+            <label>% Lợi nhuận áp dụng</label>
+            <input
+              id="newReceiptProfit"
+              type="number"
+              step="0.1"
+              value="10"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Ảnh sản phẩm</label>
+            <input id="newReceiptImage" type="file" accept="image/*" />
+            <small>Chọn ảnh để thay đổi, để trống nếu giữ ảnh hiện tại</small>
+          </div>
+          <div class="modal-actions">
+            <button
+              type="button"
+              class="cancel-btn"
+              onclick="closeModal('addReceiptModal')"
+            >
+              Hủy
+            </button>
+            <button type="submit" class="add-btn">Thêm</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Edit Product Modal -->
+    <div id="productEditModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="productModalTitle">Sửa sản phẩm</h2>
+          <button class="close-btn" onclick="closeModal('productEditModal')">
+            ×
+          </button>
+        </div>
+        <form id="productEditForm">
+          <input type="hidden" id="editProductId" />
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Mã SP</label>
+              <input id="productCode" type="text" />
+            </div>
+            <div class="form-group">
+              <label>Tên SP</label>
+              <input id="productName" type="text" />
+            </div>
+            <div class="form-group">
+              <label>Loại</label>
+              <select id="productCategory"></select>
+            </div>
+            <div class="form-group">
+              <label>Giá nhập ($)</label>
+              <input id="productImportPrice" type="number" step="0.01" />
+            </div>
+            <div class="form-group">
+              <label>% Lợi nhuận</label>
+              <input id="productProfit" type="number" step="0.1" />
+            </div>
+            <div class="form-group">
+              <label>Giá bán ($)</label>
+              <input id="productSalePrice" type="number" step="0.01" readonly />
+            </div>
+            <div class="form-group">
+              <label>Tồn kho</label>
+              <input id="productStock" type="number" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Mô tả</label>
+            <textarea id="productDescription"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="productImageEdit">Hình ảnh sản phẩm</label>
+            <input type="file" id="productImageEdit" accept="image/*" />
+            <small
+              >Chọn ảnh mới để thay đổi, để trống để giữ ảnh hiện tại</small
+            >
+          </div>
+          <div class="modal-actions">
+            <button
+              type="button"
+              class="cancel-btn"
+              onclick="closeModal('productEditModal')"
+            >
+              Hủy
+            </button>
+            <button type="submit" class="submit-btn">Lưu</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Update Status Modal -->
+    <div id="updateOrderStatusModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Cập nhật trạng thái</h2>
+          <button
+            class="close-btn"
+            onclick="closeModal('updateOrderStatusModal')"
+          >
+            ×
+          </button>
+        </div>
+        <form id="updateOrderStatusForm">
+          <input type="hidden" id="updateOrderId" />
+          <div class="form-group">
+            <label>Trạng thái</label>
+            <select id="newOrderStatus">
+              <option value="new">Mới</option>
+              <option value="pending">Chờ xử lý</option>
+              <option value="processing">Đang giao</option>
+              <option value="completed">Đã giao</option>
+              <option value="cancelled">Đã hủy</option>
+            </select>
+          </div>
+          <div class="modal-actions">
+            <button
+              type="button"
+              class="cancel-btn"
+              onclick="closeModal('updateOrderStatusModal')"
+            >
+              Hủy
+            </button>
+            <button type="submit" class="submit-btn">Cập nhật</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Reset Password Modal -->
+    <div id="resetPasswordModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Reset mật khẩu</h2>
+          <button class="close-btn" onclick="closeModal('resetPasswordModal')">
+            ×
+          </button>
+        </div>
+        <form id="resetPasswordForm">
+          <input type="hidden" id="resetPasswordCustomerId" />
+          <div class="form-group">
+            <label>Mật khẩu mới</label>
+            <input id="newPassword" type="password" />
+          </div>
+          <div class="form-group">
+            <label>Xác nhận</label>
+            <input id="confirmPassword" type="password" />
+          </div>
+          <div class="modal-actions">
+            <button
+              type="button"
+              class="cancel-btn"
+              onclick="closeModal('resetPasswordModal')"
+            >
+              Hủy
+            </button>
+            <button type="submit" class="submit-btn">Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="admin.js"></script>
+  </body>
+</html>
